@@ -1,0 +1,40 @@
+#cate-info ul, li {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+.row {
+    background-color: whitesmoke;
+    padding: 2px;
+}
+
+.tag_cates li {
+    margin-right: 10px;
+    color: blue;
+    border: 1px dotted blue;
+    border-radius: 10px;
+}
+
+#cate-info .tag_cates li {
+    float: left;
+    padding: 4px;
+}
+
+#cate-info ul:after{
+    content: '';
+    display: block;
+    height: 0px;
+    overflow: hidden;
+    clear: both;
+}
+
+.cover {
+    float: left;
+    padding: 0 20px;
+}
+
+.row1 {
+    margin-left: -60px;
+    padding: 15px 0px;
+}

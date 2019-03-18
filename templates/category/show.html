@@ -2,39 +2,56 @@
 {% block css %}
     <link rel="stylesheet" href="/static/category/category.css">
 {% endblock %}
+
+{% block navi %}
+    <li><a href="/course/showall/">全部>>></a></li>
+    {% for category in categorys %}
+        <li><a href="/course/showone/{{ category.id }}/">{{ category.title }}</a></li>
+    {% endfor %}
+{% endblock %}
+
 {% block content %}
-    <div id="cate-info" class="row">
-        <div class="col-xs-7">
-            <div class="info">
-                <div class="row">
-                    <ul class="tag_cates">
-                        <li><a>全部 >>></a></li>
-                        {% for category in categorys %}
-                            <li><a>{{ category.title }}</a></li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
     <div id="cate-info" class="row1">
         <div class="col-xs-11">
             <div class="container">
-            <ul>
-                {% for cours in courses %}
-                    <li class="cover">
-                    <div>
-                    <a href="/course/detail/{{ cours.id }}/">
-                        <img src="{{ cours.cover }}" width="190px" height="170px">
-                        <dl>{{ cours.title }}</dl>
-                        <dl>{{ cours.summary }}</dl>
-                        <dl>{{ cours.price }}</dl>
-                    </a>
-                        </div>
-                    </li>
-                {% endfor %}
-            </ul>
+                <ul>
+                    {% for cours in pager.object_list %}
+                        <li class="cover">
+                            <div>
+                                <a href="/course/detail/{{ cours.id }}/" target="view_window">
+                                    <img src="{{ cours.cover }}" width="190px" height="170px">
+                                    <dl>{{ cours.title }}</dl>
+                                    <dl>{{ cours.summary }}</dl>
+                                    <dl>￥ {{ cours.price }}</dl>
+                                </a>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
             </div>
         </div>
     </div>
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            <li>
+                <a {% if pager.has_previous %}
+                    href="/course/{{ show }}/?cid={{ cate_id }}&page={{ pager.previous_page_number }}"
+                {% endif %} aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            {% for page in paginator.page_range %}
+                <li {% if page == pager.number %}class="active"{% endif %}>
+                    <a {% if page != pager.number %}href="/course/{{ show }}/?cid={{ cate_id }}&page={{ page }}"{% endif %}>{{ page }}</a>
+                </li>
+            {% endfor %}
+            <li>
+                <a {% if pager.has_next %}
+                    href="/course/{{ show }}/?cid={{ cate_id }}&page={{ pager.next_page_number }}"
+                {% endif %} aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
 {% endblock %}

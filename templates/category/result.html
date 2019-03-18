@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block css %}
+    <link rel="stylesheet" href="/static/category/category.css">
+{% endblock %}
+
+{% block navi %}
+    <li><a href="/course/search/">全部</a></li>
+    {% for category in categorys %}
+        <li><a href="/course/showone/{{ category.id }}/">{{ category.title }}</a></li>
+    {% endfor %}
+{% endblock %}
+
+{% block content %}
+
+    <h1>{{ msg }}</h1>
+
+    <div id="cate-info" class="row1">
+        <div class="col-xs-11">
+            <div class="container">
+                <ul>
+                    {% for lesson in course_list %}
+                        <li class="cover" style="float: left">
+                            <div >
+                                <a href="/course/detail/{{ lesson.id }}/" target="view_window">
+                                    <img src="{{ lesson.cover }}" width="190px" height="170px">
+                                    <dl>{{ lesson.title }}</dl>
+                                    <dl>{{ lesson.summary }}</dl>
+                                    <dl>￥ {{ lesson.price }}</dl>
+                                </a>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

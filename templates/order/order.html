@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block css %}
+    <link rel="stylesheet" href="/static/course/css/detail.css">
+{% endblock %}
+
+{% block content %}
+    <div id="order">
+        <p>
+            <button id="backBtn" class="btn btn-default">返回</button>
+        </p>
+        <h3>我的订单</h3>
+        <div>
+            {% for foo in course %}
+                <section class="orderInfo">
+
+                    <p>订单金额：￥<span>{{ foo.price }}</span></p>
+                    <p><strong>订单信息:</strong>
+                        {% for user in userQset %}
+                            <span>{{ user.username }}</span>
+                            <span>{{ user.phone }}</span>
+                        {% endfor %}
+                    </p>
+
+                </section>
+                </div>
+                <a href="/order/detail_order/" id="backBtn" class="btn btn-success">去支付==>></a>
+            {% endfor %}
+    </div>
+{% endblock %}
+

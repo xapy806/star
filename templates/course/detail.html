@@ -1,38 +1,44 @@
 {% extends 'base.html' %}
 {% block css %}
+    <link rel="stylesheet" href="/static/category/category.css">
     <link rel="stylesheet" href="/static/course/css/detail.css">
+{% endblock %}
+{% block navi %}
+    <li><a href="/course/showall/">全部 >>></a></li>
+    <li>{{ course.0.category }}</li>
 {% endblock %}
 
 {% block content %}
     {#  整个页面   #}
     <div>
-
         <div class="col-xs-12">
             {#  课程封面   #}
             <div class="col-xs-7">
                 <img src="{{ course.0.cover }}">
             </div>
             {#  课程信息   #}
-            <div>
-                <div>
+            <div class="course_info">
+                <div class="course_desc" style="padding: 15px">
                     <div style="font-size: 20px;">{{ course.0.title }}</div>
                     <div>{{ course.0.summary }}</div>
                     <div><span>{{ course.0.tags.title }}</span></div>
                     <div>主讲老师：<b>{{ course.0.teachers.name }}</b></div>
                     <div>点赞人数：{{ course.0.favor }}</div>
                 </div>
-                <div>价格：
+                <div class="course_price">价格：
                     <span>￥{{ course.0.price }}</span>
                 </div>
-                <div>
-                    <span>立即购买</span>
-                    <span>
-                    {% if course.0.tags_id == 1 %}
-                        免费试看
-                    {% else %}
-                        免费试听
-                    {% endif %}
-                    </span>
+                <div class="course_pay">
+                    <a class="btn btn-info" href="/order/add_order/{{ course.0.id }}">加入订单</a>
+                    <a class="btn btn-success" href="/user/add/{{ course.0.id }}">加入收藏</a>
+                    <a class="btn btn-warning">
+                        {% if course.0.tags_id == 1 %}
+                            免费试看
+                        {% else %}
+                            免费试听
+                        {% endif %}
+                    </a>
+                    <a>{{ msg }}</a>
                 </div>
             </div>
         </div>
@@ -40,9 +46,7 @@
         <div class="col-xs-12">
             {#  课程介绍   #}
             <div class="col-xs-7">
-                <div>
-                    课程介绍
-                </div>
+                <div style="font-size: 30px"><b>课程介绍</b></div>
                 <div>
                     <img width="600px" src="{{ course.0.detail }}">
                 </div>
@@ -50,26 +54,41 @@
 
             <div class="col-xs-5">
                 {#  主讲教师介绍   #}
-                <div class="col-xs-5">
+                <div class="col-xs-12">
+                    <div style="font-size: 30px"><b>讲师介绍</b></div>
                     <div>
-                        <img src="{{ teacher.0.image }}">
+                        <img style="border-radius: 100%" src="{{ teacher.0.image }}">
                     </div>
                     <div>
-                        <div>{{ teacher.0.name }}</div>
+                        <div><b>{{ teacher.0.name }}</b></div>
                     </div>
                     <div>
                         <div style="width: 300px">{{ teacher.0.intro }}</div>
                     </div>
                 </div>
-
                 {#  排行榜   #}
-                <div class="col-xs-7">
-
+                <div class="col-xs-12" style="margin-top: 50px">
+                    <div id="rank"><span style="font-size: x-large; color:red">热门推荐</span></div>
+                    <table style="text-align: left">
+                        <tr>
+                            <th>课程名</th>
+                            <th>&emsp;&emsp;</th>
+                            <th>热度</th>
+                        </tr>
+                        {% for course in list %}
+                            <tr>
+                                <td><a href="/course/detail/{{ course.2 }}/">{{ course.1 }}</a></td>
+                                <td>&emsp;&emsp;</td>
+                                <td><a href="/course/detail/{{ course.2 }}/">{{ course.0 }}</a></td>
+                            </tr>
+                        {% endfor %}
+                    </table>
                 </div>
-
             </div>
         </div>
-
     </div>
-
 {% endblock %}
+
+
+
+

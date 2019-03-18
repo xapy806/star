@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block css %}
+    <link rel="stylesheet" href="/static/course/css/detail.css">
+{% endblock %}
+
+{% block content %}
+    <div id="detail_order">
+    <p>
+{#        <a id="backBtn" href="/order/add_order/"><span>返回</span></a>#}
+    </p>
+    <h3>订单详情</h3>
+    <div>
+        <section class="orderInfo">
+
+            <p><strong>付款方式:</strong>
+                <button id="backBtn" class="btn btn-danger">微信</button>
+                <button id="backBtn" class="btn btn-primary">支付宝</button>
+                <button id="backBtn" class="btn btn-success">余额支付</button>
+
+            </p>
+        </section>
+    </div>
+</div>
+{% endblock %}
+
